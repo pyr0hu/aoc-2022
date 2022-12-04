@@ -5,6 +5,7 @@ class Match
   DRAW_SCORE = 3
   LOSE_SCORE = 0
 
+  # List of allowed inputs for given symbols
   ROCK_VALUES = %w[A X]
   PAPER_VALUES = %w[B Y]
   SCISSOR_VALUES = %w[C Z]
@@ -34,7 +35,7 @@ class Match
   end
 
   def guess_choice
-    # eh, dislike
+    # TODO: not really a todo, but there could be a better way instead of hardcoding the X,Y,Z there
     score_to_find = case @choices[1]
                     when 'X' then WIN_SCORE
                     when 'Y' then DRAW_SCORE
@@ -55,6 +56,7 @@ class Match
   end
 
   def input_to_choice(input)
+    # TODO: add else branch and throw an error?
     case input
     when *ROCK_VALUES then :rock
     when *PAPER_VALUES then :paper

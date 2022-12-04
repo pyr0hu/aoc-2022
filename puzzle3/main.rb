@@ -5,6 +5,8 @@ filename = "puzzle3/input.txt"
 compartments = File.readlines(filename)
                    .map { |line| Compartment.new(line) }
 
+# TODO: I ain't sure if this is the correct place but this should not be defined in the compartment.
+#   Because of the reduce at the end, this cannot be called if inside the Compartment class, so here it is
 def item_value(item)
   if item.ord < 97
     item.ord - 38

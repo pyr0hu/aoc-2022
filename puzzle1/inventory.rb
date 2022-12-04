@@ -7,10 +7,11 @@ class Inventory
   def initialize
     @stashes = []
     @current_stash = nil
-    self.reset
+    self.advance
   end
 
-  def reset
+  def advance
+    # If the current stash is nil (like on initialize), just skip adding that to the stash list
     if @current_stash != nil then @stashes.push(@current_stash) end
     @current_stash = Stash.new
   end

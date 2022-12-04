@@ -2,6 +2,7 @@ require_relative './match'
 
 filename = "puzzle2/input.txt"
 
+# Create a list of matches from the input
 matches = File.readlines(filename)
             .map { |line| Match.new(line) }
 
