@@ -14,4 +14,8 @@ end
 
 inventory.reset
 
-puts inventory.largest(3).sum {|el| el.total }
+puts "Part 1"
+puts inventory.stashes.max.total
+
+puts "Part 2"
+puts inventory.stashes.max(3).sum {|el| el.total }

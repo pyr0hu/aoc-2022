@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Stash
+  attr_reader :total
+
   def initialize
     @total = 0
   end
@@ -9,7 +11,7 @@ class Stash
     @total += value
   end
 
-  def total
-    @total
+  def <=>(other)
+    @total <=> other.total
   end
 end
