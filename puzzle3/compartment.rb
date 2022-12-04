@@ -10,6 +10,6 @@ class Compartment
     @first_compartment = line.slice!(0..compartment_size).chars
     @second_compartment = line.chars
 
-    @common_items = @first_compartment.intersection(@second_compartment)
+    @common_items = @first_compartment & @second_compartment
   end
 end

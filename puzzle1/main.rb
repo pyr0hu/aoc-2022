@@ -25,4 +25,4 @@ puts "Part 2"
 # Take the 3 largest stashes and print the sum of the totals
 # TODO: maybe define a coercion or an integer cast, so we can call sum
 #   without the block?
-puts inventory.stashes.max(3).sum {|el| el.total }
+puts inventory.stashes.max(3).sum(&:total)

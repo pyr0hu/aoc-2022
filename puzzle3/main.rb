@@ -17,7 +17,7 @@ end
 
 puts "Part 1"
 puts compartments
-       .flat_map { |compartment| compartment.common_items }
+       .flat_map(&:common_items)
        .map {|item| item_value(item)}
        .sum
 
@@ -26,8 +26,8 @@ puts compartments
        .each_slice(3)
        .flat_map { |compartment_group|
          compartment_group
-           .last(2)
-           .reduce(compartment_group.first.items) { |carry, compartment| carry.intersection(compartment.items) }
+           .map(&:items)
+           .reduce { |compartment1, compartment2| compartment1 & compartment2 }
            .map {|item| item_value(item)}
        }
        .sum
