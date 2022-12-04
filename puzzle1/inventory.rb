@@ -2,18 +2,16 @@ require_relative './stash'
 
 class Inventory
   attr_reader :stashes
+  attr_reader :current_stash
 
   def initialize
     @stashes = []
-    @current_stash = Stash.new
+    @current_stash = nil
+    self.reset
   end
 
   def reset
-    @stashes.push(@current_stash)
+    if @current_stash != nil then @stashes.push(@current_stash) end
     @current_stash = Stash.new
-  end
-
-  def current
-    @current_stash
   end
 end

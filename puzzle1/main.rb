@@ -8,7 +8,7 @@ File.readlines(filename).each do |line|
   if line == "\n"
     inventory.reset
   else
-    inventory.current.add(line.to_i)
+    inventory.current_stash.add(line.to_i)
   end
 end
 
