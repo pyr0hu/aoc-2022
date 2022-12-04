@@ -2,11 +2,8 @@ require_relative './match'
 
 filename = "puzzle2/input.txt"
 
-matches = []
-
-File.readlines(filename).each do |line|
-  matches.push(Match.new(line))
-end
+matches = File.readlines(filename)
+            .map { |line| Match.new(line) }
 
 puts "Part 1"
 puts matches.sum {|match| match.total}

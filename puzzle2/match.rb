@@ -1,42 +1,64 @@
 # frozen_string_literal: true
 
 class Match
-  def initialize(match_up)
+  WIN_SCORE = 6
+  DRAW_SCORE = 3
+  LOSE_SCORE = 0
+
+  ROCK_VALUES = %w[A X]
+  PAPER_VALUES = %w[B Y]
+  SCISSOR_VALUES = %w[C Z]
+
+  def initialize(match)
     @choice_scores = {:rock => 1, :paper => 2, :scissor => 3}
-    @opponent_choice_map = {'A' => :rock, 'B' => :paper, 'C' => :scissor}
-    @my_choice_map = {'X' => :rock, 'Y' => :paper, 'Z' => :scissor}
+
     @score_map = {
       :rock => {
-        :scissor => 6, :rock => 3, :paper => 0
+        :scissor => WIN_SCORE, :rock => DRAW_SCORE, :paper => LOSE_SCORE
       },
       :paper => {
-        :rock => 6, :paper => 3, :scissor => 0
+        :rock => WIN_SCORE, :paper => DRAW_SCORE, :scissor => LOSE_SCORE
       },
       :scissor => {
-        :paper => 6, :scissor => 3, :rock => 0
+        :paper => WIN_SCORE, :scissor => DRAW_SCORE, :rock => LOSE_SCORE
       },
     }
 
-    choices = match_up.split
-    @opponent_choice_str = choices[0]
-    @my_choice_str = choices[1]
-    @opponent_choice = @opponent_choice_map[@opponent_choice_str]
-    @my_choice = @my_choice_map[@my_choice_str]
+    @choices = match.split
+    @opponent_choice = self.input_to_choice(@choices[0])
+    @my_choice = self.input_to_choice(@choices[1])
   end
 
   def total
-    @choice_scores[@my_choice] + @score_map[@my_choice][@opponent_choice]
+    self.my_score + self.result_score
   end
 
   def guess_choice
-    score_to_find = case @my_choice_str
-                    when 'X' then 6
-                    when 'Y' then 3
-                    else 0
+    # eh, dislike
+    score_to_find = case @choices[1]
+                    when 'X' then WIN_SCORE
+                    when 'Y' then DRAW_SCORE
+                    else LOSE_SCORE
                     end
 
-    @my_choice =@score_map[@opponent_choice].key(score_to_find)
+    @my_choice = @score_map[@opponent_choice].key(score_to_find)
 
     self
+  end
+
+  def my_score
+    @choice_scores[@my_choice]
+  end
+
+  def result_score
+    @score_map[@my_choice][@opponent_choice]
+  end
+
+  def input_to_choice(input)
+    case input
+    when *ROCK_VALUES then :rock
+    when *PAPER_VALUES then :paper
+    when *SCISSOR_VALUES then :scissor
+    end
   end
 end
